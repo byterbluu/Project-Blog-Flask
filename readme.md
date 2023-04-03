@@ -1,0 +1,1 @@
+App about blog where you can Add, edit, and delete post and more stuffs, made with Python, Flask, PostgreSQL and more..

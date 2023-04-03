@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+<title>BlogPosts - {% block title %}Register{% endblock %}</title>
+
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css' )}}">
+
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+<header class="p-2 text-bg-dark">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-center">
+            <a href="{{ url_for('home.index') }}" class="d-flex align-items-center  mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="{{ url_for('static', filename = 'img/bp-light.png' )}}" alt="blog posts" width="40">
+            </a>        
+        </div>
+    </div>
+</header>
+
+
+    <!-- Sección de bienvenida -->
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-2">
+            <div class="col-lg-7 text-center text-lg-start">
+                <h1 class="display-4 fw-bold  mb-3 fst-italic">Registrate en BLOG POSTS</h1>
+
+                <p class="col-lg-10 fs-4">Aquí podrás compartir tus ideas, pensamientos y experiencias con una comunidad
+                    global de lectores.
+                    Nuestra plataforma es fácil de usar y te permite publicar tus blogs en pocos pasos.
+                </p>
+
+                <p class="col-lg-10 fs-4">
+                    ¡Únete a nuestra comunidad hoy y comienza a compartir tus ideas con el mundo!
+                </p>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5">
+                <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="name@example.com" required>
+                        <label for="username">Nombre de perfil</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
+                        <label for="email">Correo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" placeholder="password" name="password" required minlength="8" maxlength="25">
+                        <label for="password">Contraseña</label>
+                    </div>
+
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Registrate</button>
+                    <hr class="my-4">
+                    <p class="text-muted text-center">Si tienes una cuenta en BLOG-POSTS haz clic en
+                        <a href="{{ url_for('auth.login') }}">Iniciar sesión</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
