@@ -1,7 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_ckeditor import CKEditor
 
 db = SQLAlchemy()  #Instancia de sql alchemy
+
+
 
 
 def create_app():
@@ -13,6 +16,8 @@ def create_app():
     
     db.init_app(app) #INICIALIZAMOS LA BASE DE DATOS
 
+    # CKEditor
+    ckeditor = CKEditor(app)
 
     # REGISTER VIEW
     from blogapp import home

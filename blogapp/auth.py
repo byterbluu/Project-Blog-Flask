@@ -79,6 +79,51 @@ def login_required(view):
         return view(**kwargs)
     return wrapped_view
 
-@bp.route('/profile')
-def profile():
-    return 'Pagina de profile'
+#PROFILE EDIT
+
+from werkzeug.utils import secure_filename
+
+
+#PROFILE MENU
+
+@bp.route('/profile/<int:id>', methods=['GET', 'POST'])
+@login_required
+def profile(id):
+    
+    user = User.query.get_or_404(id)
+    if request.method == 'POST':
+        user.username = request.form.get('username')
+        password = request.form.get('password')
+
+         #GUARDAMOS LAS IMAGENES SUBIDAS
+
+        if request.files['photo']:
+            photo = request.files['photo']
+            photo.save(f'blogapp/static/media/{secure_filename(photo.filename)}')
+            user.photo = f'media/{secure_filename(photo.filename)}' 
+
+
+        #VALIDACION DE DATOS
+        error = None
+        if len(password) != 0:
+            user.password = generate_password_hash(password)
+            error = 'La contraseña se ha modificado'
+        elif len(password) == 0:
+            error = 'La contraseña no se ha modificado'    
+        # elif len(password) >= 0 or len(password) <= 8:
+        #     error = 'La contraseña debe tener al menos 6 caracteres'    
+
+           
+
+        if error is not None:
+            flash(error)
+        else:
+            db.session.commit()
+            return redirect(url_for('auth.profile', id=id))
+
+        
+    return render_template('auth/profile.html', user = user)
+
+
+
+
