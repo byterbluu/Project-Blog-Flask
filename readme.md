@@ -15,10 +15,15 @@ Clone the repository:
 bash
 Copy code
 git clone https://github.com/byterbluu/Project-Blog-Flask.git
+
 Install the dependencies:
+
 bash
+
 Copy code
+
 pip install -r requirements.txt
+
 Create the PostgreSQL database:
 bash
 Copy code
