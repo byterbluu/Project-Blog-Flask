@@ -19,6 +19,10 @@ def create_app():
     # CKEditor
     ckeditor = CKEditor(app)
 
+    # CHANGE IDIOM
+    import locale
+    locale.setlocale(locale.LC_ALL, 'es_ES')
+
     # REGISTER VIEW
     from blogapp import home
     app.register_blueprint(home.bp)

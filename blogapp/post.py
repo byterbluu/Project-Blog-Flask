@@ -42,7 +42,27 @@ def create():
 
     return render_template('admin/create.html')
 
-@bp.route('/update')
+@bp.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
-def update():
-    return 'Pagina de update'
+def update(id):
+    post = Post.query.get_or_404(id)
+
+    if request.method == 'POST':
+        post.title = request.form.get('title')
+        post.info = request.form.get('info')
+        post.content = request.form.get('ckeditor')
+
+        db.session.commit()
+        flash(f'El blog {post.title} se ha actualizado correctamente')
+        return redirect(url_for('post.posts'))
+    return render_template('admin/update.html', post=post)
+
+
+@bp.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    post = Post.query.get_or_404(id)
+    db.session.delete(post)
+    db.session.commit()
+    flash(f'El blog {post.title} se ha eliminado correctamente')
+    return redirect(url_for('post.posts', post=post))
